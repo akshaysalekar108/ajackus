@@ -4,10 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
-use GMaps;
+use GuzzleHttp\Client;
+use App\Library\Curls;
+// use FarhanWazir\GoogleMaps\GMaps;
 
 class PostsController extends Controller
 {
+
+    public function cities(){
+        // $client = new Client();
+    	// $response = $client->request('GET', 'https://restcountries.eu/rest/v2/name/india');
+    	// $statusCode = $response->getStatusCode();
+        // $body = $response->getBody()->getContents();
+        // echo $body;
+        // return view('tasks.create_task')->with('body',$body);
+    	
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -24,34 +38,13 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    var $gmap ;
     public function create()
     {
-            
-        $config = array();
-        $config['center'] = 'auto';
-        $pos =$config['center'] = 'auto';
-        // $config['onboundschanged'] = 'if (!centreGot) {
-        //     var mapCentre = map.getCenter();
-        //     marker_0.setOptions({
-        //         position: new google.maps.LatLng(mapCentre.lat(), mapCentre.lng())
-        //     });
-        // }
-        // centreGot = true;';
-        // $config['zoom'] ='18';
-        $config['map_height']='300px';
-        $config['scroll-wheel'] = true;
-    
-        GMaps::initialize($config);
-        $marker = array();
-        $marker['position'] = 'Mumbai,India';
-      
-        GMaps::add_marker($marker);
 
-        $map = GMaps::create_map();
+
+        return view('tasks.create_task');
     
-        
-        return view('tasks.create_task')->with('map',$map);
-        // return view('tasks.create_task');
     }
 
     /**
@@ -66,11 +59,15 @@ class PostsController extends Controller
             'task' => 'required',
             'month' =>'required',
             'location' => 'required',
+            'logitude'=>'required',
+            'latitude'=>'required',
             'city' => 'required'
         ]);
         $task = new Post;
         $task->task = $request->input('task');
         $task->location = $request->input('location');
+        $task->logitude = $request->input('logitude');
+        $task->latitude = $request->input('latitude');
         $task->city = $request->input('city');
         $task->month = $request->input('month');
         $task->save();

@@ -1,5 +1,5 @@
 <?php
-
+use GuzzleHttp\Client;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/hello', function () {
-    return 'Hello World';
-});
+Route::get('/cities','PostsController@cities');
 
 Route::get('/user/{id}/{name}',function($id, $name){
     return 'This is user '.$name.'with id'.$id; 
@@ -27,14 +25,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('task','PostsController');
 
-Route::get('/map', function () {
-    $config['center'] = 'Air Canada Center,Toronto';
-    $config['zoom'] ='14';
-    $config['map_height']='300px';
-    $config['scroll-wheel'] = false;
 
-    Gmaps::initialize($config);
-    $map = Gmaps::create_map();
-
-    return view('tasks.create_task')->with('map',$map);
-});

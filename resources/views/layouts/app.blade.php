@@ -78,8 +78,23 @@
         @yield('content')
     </div>
 
-    <!-- Scripts -->
+    <!-- Scripts   -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCICVFZg9PawAeVO5oH_BRdE7IEu93eG8E&libraries=places"></script>
+<script type="text/javascript">
+    google.maps.event.addDomListener(window, 'load', function () {
+        var places = new google.maps.places.Autocomplete(document.getElementById('location'));
+        google.maps.event.addListener(places, 'place_changed', function () {
+            var place = places.getPlace();
+            var location = place.formatted_address;
+            var lng = place.geometry.location.lng(location);
+            var lat = place.geometry.location.lat(location);
+            console.log(place);
+            document.getElementById('lng').value= lng;
+            document.getElementById('lat').value= lat;
+        });
+    });
+</script>
 
 </body>
 </html>

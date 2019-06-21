@@ -25,6 +25,8 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->mediumText('task');
             $table->string('location');
+            $table->string('logitude');
+            $table->string('latitude');
             $table->string('city');
             $table->string('month');
             $table->timestamps();

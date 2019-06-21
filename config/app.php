@@ -164,6 +164,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Cornford\Googlmapper\MapperServiceProvider::class,
         FarhanWazir\GoogleMaps\GMapsServiceProvider::class,
 
         /*
@@ -229,6 +230,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacede::class,
         'Html' => Collective\Html\HtmlFacede::class,
+        'Mapper'=> Cornford\Googlmapper\Facades\MapperFacade::class,
         'GMaps' => FarhanWazir\GoogleMaps\Facades\GMapsFacade::class,
 
 
