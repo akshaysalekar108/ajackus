@@ -29,7 +29,7 @@
                 </div>
 
             <div class="form-group">
-                    {{Form::label('location', 'Location')}}
+                    {{Form::label('location', 'Location')}} : <small>Enter Country</small>
                     {{Form::text('location', '', ['class' => 'form-control', 'placeholder' => 'Location', 'data-dependent="cities"'])}}
                     {{ Form::hidden('logitude', '', array('id' => 'lng')) }}
                     {{ Form::hidden('latitude', '', array('id' => 'lat')) }}
