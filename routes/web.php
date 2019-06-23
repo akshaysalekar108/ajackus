@@ -11,7 +11,8 @@ use GuzzleHttp\Client;
 |
 */
 
-Route::get('/cities','PostsController@cities');
+// Route::get('/cities/{country}','PostsController@cities');
+Route::post('cities/country','PostsController@cities')->name('cities');
 
 Route::get('/user/{id}/{name}',function($id, $name){
     return 'This is user '.$name.'with id'.$id; 

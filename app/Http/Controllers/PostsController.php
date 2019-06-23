@@ -6,19 +6,39 @@ use Illuminate\Http\Request;
 use App\Post;
 use GuzzleHttp\Client;
 use App\Library\Curls;
+use Illuminate\Support\Arr;
 // use FarhanWazir\GoogleMaps\GMaps;
+
 
 class PostsController extends Controller
 {
+    
+    public function cities(Request $request){
+        // dd($country);
+        $cntry = $request->get('location');
+        $dependent = $request->get('dependent');
+        $path = storage_path() . "/countriesToCities.json";
+    $json = json_decode(file_get_contents($path), true); 
+    $contains = Arr::only($json, $cntry);
+        // dd($contains);
+            // $output = '<option value="select">Select'.ucfirst($dependent).'</option>';
+            
+            // foreach($contains as $contain){
+            // $output .='<option value="'.$contain->$dependent.'">'.$contain->$dependent.'</option>';
+            // }
+       
 
-    public function cities(){
-        // $client = new Client();
-    	// $response = $client->request('GET', 'https://restcountries.eu/rest/v2/name/india');
-    	// $statusCode = $response->getStatusCode();
-        // $body = $response->getBody()->getContents();
-        // echo $body;
-        // return view('tasks.create_task')->with('body',$body);
-    	
+            // foreach($contains as $contain){
+            //     $output .='<option value="'.$contain[$inc].'">'.$contain[$inc].'</option>';
+            //     $inc++;
+            // }
+       
+       
+        
+             
+        return $contains;
+        // return view('tasks.create_task')->with('names',$contains);
+    	// return $contains;
     }
 
 
@@ -41,7 +61,10 @@ class PostsController extends Controller
     var $gmap ;
     public function create()
     {
-
+    //     $country = '';
+    //     $path = storage_path() . "/countriesToCities.json";
+    // $json = json_decode(file_get_contents($path), true); 
+    // $contains = Arr::only($json, $country);
 
         return view('tasks.create_task');
     

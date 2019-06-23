@@ -85,6 +85,7 @@
     google.maps.event.addDomListener(window, 'load', function () {
         var places = new google.maps.places.Autocomplete(document.getElementById('location'));
         google.maps.event.addListener(places, 'place_changed', function () {
+
             var place = places.getPlace();
             var location = place.formatted_address;
             var lng = place.geometry.location.lng(location);
@@ -92,6 +93,33 @@
             console.log(place);
             document.getElementById('lng').value= lng;
             document.getElementById('lat').value= lat;
+            var _token = $('input[name="_token"]').val();
+            if(location){
+                $.ajax({
+                url:'{{route("cities")}}',
+                method:"POST",
+                data:{location:location, dependent:'cities',_token:_token},
+                success:function(result){
+                    $('#cities').empty();
+                    var option = '<option>Select city</option>';
+                    // console.log(typeof result);
+    
+                   
+                    var array = $.map(result, function(value, index) {
+                            return value;
+                                });
+                  
+
+                   for(var i=0 ; i<array.length;i++){
+                       option +='<option value="'+array[i]+'">'+array[i]+'</option>';
+                   }
+                   $('#cities').append(option);
+                },
+                error:function(error){
+                    alert(JSON.stringify(error));
+                }
+            });
+            }
         });
     });
 </script>
